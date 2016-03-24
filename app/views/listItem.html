@@ -1,1 +1,8 @@
 <p ng-show="geerItem">{{geerItem}}</p>
+
+
+
+<form>
+  <input placeholder="Items..." ng-model="newItem">
+  <button type="submit" ng-click="addItem(newItem);newItem = null;">send</button>
+</form>
