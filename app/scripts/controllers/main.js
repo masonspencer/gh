@@ -10,20 +10,10 @@
 angular.module('workspaceApp')
   .controller('MainCtrl', function ($scope, Ref, $firebaseArray, $timeout) {
     // synchronize a read-only, synchronized array of geerItem, limit to most recent 10
-    $scope.geerItem = $firebaseArray(Ref.child('geerItem').limitToLast(10));
-    var testt = $firebaseArray(Ref);
+    $scope.geerItems = $firebaseArray(Ref.child('geerItem'));
+    // var testt = $firebaseArray(Ref);
     // display any errors
-    $scope.geerItem.$loaded().catch(alert);
-console.log(testt);
-alert('working');
 
-
-
-for (var j = 0; j < testt.length; j++){
-
-console.log(testt[j]);
-
-}
     // // provide a method for adding a message
     // $scope.addMessage = function(newMessage) {
     //   if( newMessage ) {

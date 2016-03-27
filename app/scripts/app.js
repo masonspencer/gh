@@ -18,5 +18,6 @@ angular.module('workspaceApp', [
     'ngTouch',
     'firebase',
     'firebase.ref',
-    'firebase.auth'
+    'firebase.auth',
+    'mm.foundation'
   ]);

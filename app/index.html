@@ -13,6 +13,9 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <!-- Angular Foundation CSS CDN -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.css" rel="stylesheet">
+
   </head>
   <body ng-app="workspaceApp">
     <!--[if lt IE 7]>
@@ -20,49 +23,84 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="header" ng-cloak="">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
+<div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+    <nav class="tab-bar">
+      <section class="left-small">
+        <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+      </section>
 
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
+      <section class="middle tab-bar-section">
+        <h1 class="title">Foundation</h1>
+      </section>
 
-            <a class="navbar-brand" href="#/">workspace</a>
-          </div>
+      <!--<section class="right-small">-->
+      <!--  <a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>-->
+      <!--</section>-->
+    </nav>
 
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+    <aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        <li class="active"><a href="#/">Home</a></li>
+        <li><a ng-href="#/listItem">listItem</a></li>
+        <!-- //angularfire -->
+        <li><a ng-href="#/chat">chat</a></li>
+        <li>
+          <a ng-hide-auth="" href="#/login">log in</a>
+          <a ng-show-auth="" href="#/account">account</a>
+        </li>
+      </ul>
+    </aside>
 
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/listItem">listItem</a></li>
-              <!-- //angularfire -->
-              <li><a ng-href="#/chat">chat</a></li>
-              <li>
-              <a ng-hide-auth="" href="#/login">log in</a>
-              <a ng-show-auth="" href="#/account">account</a>
-            </li>
+<!--For right menu, uncomment this and right-off-canvas-taggle-->
+<!--    <aside class="right-off-canvas-menu">-->
+<!--      <ul class="off-canvas-list">-->
+<!--        <li><label>Users</label></li>-->
+<!--        <li><a href="#">Hari Seldon</a></li>-->
+<!--        <li><a href="#">...</a></li>-->
+<!--      </ul>-->
+<!--    </aside>-->
 
-            </ul>
-          </div>
+<!-- Main page container -->
+    <section class="main-section">
+      <div class="container">
+        <div ng-view="" class="small-12 columns">
         </div>
       </div>
-    </div>
 
-    <div class="container">
-    <div ng-view=""></div>
-    </div>
-
-    <div class="footer">
-      <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team and Firebase</p>
+      <div class="footer">
+        <div class="container">
+          <ul>
+            <li>
+              <button type="button" class="button" style="width:33%">
+                  <a ng-href="#/listItem">listItem</a>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="button" style="width:33%">
+                  <a ng-href="#/chat">chat</a>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="button" style="width:33%">
+                <a ng-hide-auth="" href="#/login">log in</a>
+                <a ng-show-auth="" href="#/account">account</a>
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
 
+      
+    </section>
+<!-- End Main page container -->
+
+
+
+  <a class="exit-off-canvas"></a>
+
+  </div>
+</div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -88,6 +126,8 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-foundation/mm-foundation-tpls.js"></script>
+    <script src="bower_components/angular-foundation/mm-foundation.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
