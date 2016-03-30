@@ -8,8 +8,8 @@
  */
  /*global angular*/
 angular.module('workspaceApp')
-  .controller('ChatCtrl', function ($scope, Ref, user, $firebaseObject, $firebaseArray, $timeout) {
-    
+  .controller('ChatSingleCtrl', function ($scope, Ref, user, $routeParams, $firebaseObject, $firebaseArray, $timeout) {
+    $scope.params = $routeParams;
     // synchronize a read-only, synchronized array of messages, limit to most recent 10
     $scope.messages = $firebaseArray(Ref.child('messages').orderByChild("from").equalTo(user.uid));
     

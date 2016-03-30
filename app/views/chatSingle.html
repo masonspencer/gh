@@ -1,5 +1,6 @@
 
 <h2>Chat</h2>
+{{params.from}}
 <form>
   <input class="text-input"  placeholder="Message..." ng-model="newMessage">
   <button type="submit" class="button--cta" ng-click="addMessage(newMessage);newMessage = null;">send</button>

@@ -62,9 +62,13 @@ angular.module('workspaceApp')
         controller: 'MainCtrl'
       })
 
-      .when('/chat', {
+      .whenAuthenticated('/chat', {
         templateUrl: 'views/chat.html',
         controller: 'ChatCtrl'
+      })
+      .whenAuthenticated('/chatSingle/:from', {
+        templateUrl: 'views/chatSingle.html',
+        controller: 'ChatSingleCtrl'
       })
       .when('/listItem', {
         templateUrl: 'views/listItem.html',

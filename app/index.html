@@ -45,6 +45,7 @@
         <li><a ng-href="#/listItem">listItem</a></li>
         <!-- //angularfire -->
         <li><a ng-href="#/chat">chat</a></li>
+        <li><a ng-href="#/chatSingle/test">chatSingle</a></li>
         <li>
           <a ng-hide-auth="" href="#/login">log in</a>
           <a ng-show-auth="" href="#/account">account</a>
@@ -63,7 +64,7 @@
 
 <!-- Main page container -->
     <section class="main-section">
-      <div class="container">
+      <div class="container small-12 columns">
         <div ng-view="" class="small-12 columns">
         </div>
       </div>
@@ -127,7 +128,6 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-foundation/mm-foundation-tpls.js"></script>
-    <script src="bower_components/angular-foundation/mm-foundation.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -137,6 +137,7 @@
         <script src="scripts/angularfire/config.js"></script>
         <script src="scripts/angularfire/firebase.ref.js"></script>
         <script src="scripts/controllers/chat.js"></script>
+        <script src="scripts/controllers/chatSingle.js"></script>
         <script src="scripts/controllers/listItem.js"></script>
         <script src="scripts/filters/reverse.js"></script>
         <script src="scripts/angularfire/auth.js"></script>
@@ -146,5 +147,16 @@
         <script src="scripts/directives/ngHideAuth.js"></script>
         <script src="scripts/routes.js"></script>
         <!-- endbuild -->
+        
+        
+    <!--Onsen & Semantic-->
+    <!--<script src="scripts/onsen/loader.js"></script>-->
+    <!--<link rel="stylesheet" href="scripts/onsen/loader.css">-->
+    <!--<link rel="stylesheet" href="styles/onsen_style.css">-->
+    <!--<link rel="stylesheet" href="//oss.maxcdn.com/semantic-ui/2.1.8/semantic.min.css">-->
+    <!--<script src="//oss.maxcdn.com/semantic-ui/2.1.8/semantic.min.js"></script>-->
+    <!--Onsen & Semantic-->
+    
+    
 </body>
 </html>
