@@ -19,5 +19,4 @@ angular.module('workspaceApp', [
     'firebase',
     'firebase.ref',
     'firebase.auth',
-    'mm.foundation'
   ]);
