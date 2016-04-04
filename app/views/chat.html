@@ -1,5 +1,17 @@
+    <ion-nav-bar class="bar-stable">
+          <ion-nav-title>
+      Chat
+    </ion-nav-title>
+			<ion-nav-back-button>
+			</ion-nav-back-button>
 
-<h2>Chat</h2>
+			<ion-nav-buttons side="left">
+				<button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+				</button>
+			</ion-nav-buttons>
+		</ion-nav-bar>		
+<ion-view >
+        <ion-content class="padding has-header">
 <form>
   <input class="text-input"  placeholder="Message..." ng-model="newMessage">
   <button type="submit" class="button--cta" ng-click="addMessage(newMessage);newMessage = null;">send</button>
@@ -27,3 +39,5 @@
       </div>
     </div>
   </div>
+          </ion-content>
+      </ion-view>

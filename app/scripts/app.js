@@ -19,4 +19,7 @@ angular.module('workspaceApp', [
     'firebase',
     'firebase.ref',
     'firebase.auth',
+    'ionic'
+    // 'starter.controllers',
+    // 'starter.services'
   ]);

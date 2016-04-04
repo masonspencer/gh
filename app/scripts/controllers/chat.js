@@ -1,17 +1,11 @@
 'use strict';
-/**
- * @ngdoc function
- * @name workspaceApp.controller:ChatCtrl
- * @description
- * # ChatCtrl
- * A demo of using AngularFire to manage a synchronized list.
- */
+
  /*global angular*/
 angular.module('workspaceApp')
   .controller('ChatCtrl', function ($scope, Ref, user, $firebaseObject, $firebaseArray, $timeout) {
     
     // synchronize a read-only, synchronized array of messages, limit to most recent 10
-    $scope.messages = $firebaseArray(Ref.child('messages').orderByChild("from").equalTo(user.uid));
+    $scope.messages = $firebaseArray(Ref.child('messages').orderByChild('from').equalTo(user.uid));
     
     // display any errors
     $scope.messages.$loaded().catch(alert);

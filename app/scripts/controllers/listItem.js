@@ -15,7 +15,10 @@ angular.module('workspaceApp')
     $scope.addItem = function(newItem) {
       if( newItem ) {
         // push a message to the end of the array
-        $scope.geerItems.$add({text: newItem})
+        $scope.geerItems.$add({
+          text: newItem
+          
+        })
           // display any errors
           .catch(alert);
       }

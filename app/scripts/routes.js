@@ -82,8 +82,51 @@ angular.module('workspaceApp')
         templateUrl: 'views/account.html',
         controller: 'AccountCtrl'
       })
+      .when('/feedItem/:itemID', {
+        templateUrl: 'views/feeditem.html',
+        controller: 'FeeditemCtrl'
+      })
       .otherwise({redirectTo: '/'});
   }])
+  
+  
+// .config(function($stateProvider, $urlRouterProvider) {
+
+//   $stateProvider
+//     .state('home', {
+//       url: '/home',
+//       templateUrl: 'views/main.html',
+//       controller: 'MainCtrl'
+//     })
+//     .state('listItemCtrl', {
+//       url: '/listItemCtrl',
+//         templateUrl: 'views/listItem.html',
+//         controller: 'listItemCtrl'
+//     })
+//     .state('login', {
+//       url: '/login',
+//         templateUrl: 'views/login.html',
+//         controller: 'LoginCtrl'
+//     })
+//     .state('account', {
+//       url: '/account',
+//         templateUrl: 'views/account.html',
+//         controller: 'AccountCtrl'
+//     })
+//     .state('chat', {
+//       url: '/chat',
+//         templateUrl: 'views/chat.html',
+//         controller: 'ChatCtrl'
+//     });
+
+
+
+//   $urlRouterProvider.otherwise('/home');
+
+// })
+
+
+
 
   /**
    * Apply some route security. Any route's resolve method can reject the promise with

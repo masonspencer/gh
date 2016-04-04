@@ -1,4 +1,17 @@
+    <ion-nav-bar class="bar-stable">
+          <ion-nav-title>
+      Feed
+    </ion-nav-title>
+			<ion-nav-back-button>
+			</ion-nav-back-button>
 
+			<ion-nav-buttons side="left">
+				<button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+				</button>
+			</ion-nav-buttons>
+		</ion-nav-bar>		
+<ion-view >
+        <ion-content class="padding has-header">
 <div class="row-fluid">
 <div class="{{user.provider === 'password'? 'col-md-4' : 'col-md-12'}}">
   <h3>Profile</h3>
@@ -72,3 +85,5 @@
 </div>
 <p class="clearfix"></p>
 <div ng-repeat="message in messages" class="alert alert-{{message.type}}">{{message.text}}</div>
+        </ion-content>
+</ion-view>

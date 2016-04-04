@@ -8,6 +8,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -22,85 +23,78 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-<div class="off-canvas-wrap" data-offcanvas>
-  <div class="inner-wrap">
-    <nav class="tab-bar">
-      <section class="left-small">
-        <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
-      </section>
-
-      <section class="middle tab-bar-section">
-        <h1 class="title">Foundation</h1>
-      </section>
-
-      <!--<section class="right-small">-->
-      <!--  <a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>-->
-      <!--</section>-->
-    </nav>
-
-    <aside class="left-off-canvas-menu">
-      <ul class="off-canvas-list">
-        <li class="active"><a href="#/">Home</a></li>
-        <li><a ng-href="#/listItem">listItem</a></li>
-        <!-- //angularfire -->
-        <li><a ng-href="#/chat">chat</a></li>
-        <li><a ng-href="#/chatSingle/test">chatSingle</a></li>
-        <li>
-          <a ng-hide-auth="" href="#/login">log in</a>
-          <a ng-show-auth="" href="#/account">account</a>
-        </li>
-      </ul>
-    </aside>
-
-<!--For right menu, uncomment this and right-off-canvas-taggle-->
-<!--    <aside class="right-off-canvas-menu">-->
-<!--      <ul class="off-canvas-list">-->
-<!--        <li><label>Users</label></li>-->
-<!--        <li><a href="#">Hari Seldon</a></li>-->
-<!--        <li><a href="#">...</a></li>-->
-<!--      </ul>-->
-<!--    </aside>-->
-
-<!-- Main page container -->
-    <section class="main-section">
-      <div class="container small-12 columns">
-        <div ng-view="" class="small-12 columns">
-        </div>
-      </div>
-
-      <div class="footer">
-        <div class="container">
-          <ul>
-            <li>
-              <button type="button" class="button" style="width:33%">
-                  <a ng-href="#/listItem">listItem</a>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="button" style="width:33%">
-                  <a ng-href="#/chat">chat</a>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="button" style="width:33%">
-                <a ng-hide-auth="" href="#/login">log in</a>
-                <a ng-show-auth="" href="#/account">account</a>
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      
-    </section>
-<!-- End Main page container -->
+<div>
+<ion-side-menus>
+  <ion-side-menu-content>
 
 
-
-  <a class="exit-off-canvas"></a>
-
+		<div ng-view=""><ion-nav-view style="padding-top: 200px;"></ion-nav-view></div>
+                
+	<div class="tabs tabs-icon-top">
+    <a class="tab-item" href="#/">
+      <i class="icon ion-home"></i>
+      Home
+    </a>
+    <a class="tab-item" href="#/chat">
+      <i class="icon ion-star"></i>
+      Chat
+    </a>
+    <a class="tab-item" ng-hide-auth="" href="#/login">
+      <i class="icon ion-gear-a"></i>
+      Log In
+    </a>
+    <a class="tab-item" ng-show-auth="" href="#/account">
+      <i class="icon ion-gear-a"></i>
+      Account
+    </a>
   </div>
-</div>
+
+  </ion-side-menu-content>
+  <!-- Left menu -->
+  <ion-side-menu side="left">
+    <ion-header-bar class="bar-stable">
+	    <h1 class="title">Left</h1>
+	  </ion-header-bar>
+		<ion-content>
+			<ion-list>
+				<ion-item nav-clear menu-close class="item-icon-left" href="#/">
+					<i class="icon ion-ios-home"></i>
+					Home
+				</ion-item>
+				<ion-item nav-clear menu-close class="item-icon-left" href="#/listItem">
+					<i class="icon ion-ios-home"></i>
+					listItem
+				</ion-item>
+				<ion-item nav-clear menu-close class="item-icon-left" href="#/chat">
+					<i class="icon ion-ios-home"></i>
+					Chat
+				</ion-item>
+				<ion-item nav-clear menu-close class="item-icon-left" href="#/chatSingle/test">
+					<i class="icon ion-ios-home"></i>
+					chatSingle
+				</ion-item>
+				<ion-item nav-clear menu-close ng-hide-auth="" class="item-icon-left" href="#/login">
+					<i class="icon ion-ios-home"></i>
+					log in
+				</ion-item>
+				<ion-item nav-clear menu-close class="item-icon-left" ng-show-auth="" href="#/account">
+					<i class="icon ion-ios-home"></i>
+					account
+				</ion-item>
+		</ion-content>
+  </ion-side-menu>
+
+  <!-- Right menu -->
+  <ion-side-menu side="right">
+  </ion-side-menu>
+
+</ion-side-menus>
+
+
+
+
+
+      </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -126,6 +120,9 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/ionic/release/js/ionic.js"></script>
+    <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -135,7 +132,7 @@
         <script src="scripts/angularfire/config.js"></script>
         <script src="scripts/angularfire/firebase.ref.js"></script>
         <script src="scripts/controllers/chat.js"></script>
-        <script src="scripts/controllers/chatSingle.js"></script>
+        <!--<script src="scripts/controllers/chatSingle.js"></script>-->
         <script src="scripts/controllers/listItem.js"></script>
         <script src="scripts/filters/reverse.js"></script>
         <script src="scripts/angularfire/auth.js"></script>
@@ -144,6 +141,7 @@
         <script src="scripts/directives/ngShowAuth.js"></script>
         <script src="scripts/directives/ngHideAuth.js"></script>
         <script src="scripts/routes.js"></script>
+        <script src="scripts/controllers/feeditem.js"></script>
         <!-- endbuild -->
         
       
