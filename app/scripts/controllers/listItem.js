@@ -16,8 +16,10 @@ angular.module('workspaceApp')
       if( newItem ) {
         // push a message to the end of the array
         $scope.geerItems.$add({
-          text: newItem
-          
+          name: newItem.name,
+          price: newItem.price,
+          description: newItem.description,
+          tags: newItem.tags
         })
           // display any errors
           .catch(alert);
