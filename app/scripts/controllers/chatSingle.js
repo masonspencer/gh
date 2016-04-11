@@ -9,9 +9,9 @@
  /*global angular*/
 angular.module('workspaceApp')
   .controller('ChatSingleCtrl', function ($scope, Ref, user, $routeParams, $firebaseObject, $firebaseArray, $timeout) {
-    $scope.params = $routeParams;
+    var params = $routeParams;
     // synchronize a read-only, synchronized array of messages, limit to most recent 10
-    $scope.messages = $firebaseArray(Ref.child('messages').orderByChild("from").equalTo(user.uid));
+    $scope.messages = $firebaseArray(Ref.child('messages/' + params.from + '/messages'));
     
     // display any errors
     $scope.messages.$loaded().catch(alert);
@@ -21,13 +21,23 @@ angular.module('workspaceApp')
       if( newMessage ) {
         // push a message to the end of the array
         $scope.messages.$add({
-          text: newMessage,
-          from: user.uid
+          author: user.uid,
+          body: newMessage,
+          time: Date.now()
         })
           // display any errors
           .catch(alert);
       }
     };
+    
+  $scope.remove = function(message) {
+    if (message.author === user.uid) {
+    $scope.messages.$remove(message);
+    }
+    else {
+      alert('You cant remove that');
+    }
+  };
 
     function alert(msg) {
       $scope.err = msg;

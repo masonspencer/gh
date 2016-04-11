@@ -7,7 +7,7 @@
  * Manages authentication to any active providers.
  */
 angular.module('workspaceApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location, $q, Ref, $timeout) {
+  .controller('LoginCtrl', function ($scope, Auth, $location, $q, Ref, $firebaseArray, $timeout, $ionicPopup) {
     $scope.oauthLogin = function(provider) {
       $scope.err = null;
       Auth.$authWithOAuthPopup(provider, {rememberMe: true}).then(redirect, showError);
@@ -19,19 +19,69 @@ angular.module('workspaceApp')
     };
 
     $scope.passwordLogin = function(email, pass) {
-      $scope.err = null;
-      Auth.$authWithPassword({email: email, password: pass}, {rememberMe: true}).then(
-        redirect, showError
-      );
+      if( !email ) {
+        $scope.err = 'Please enter an email.';
+        $ionicPopup.alert({
+          title: 'Email Invalid',
+          template: 'Please enter a valid email.'});
+      }
+      else if( !pass ) {
+        $scope.err = 'Please enter a password.';
+        $ionicPopup.alert({
+          title: 'Password Empty',
+          template: 'Please enter a password'});
+      }
+      else {
+        $scope.err = null;
+        Auth.$authWithPassword({email: email, password: pass}, {rememberMe: true}).then(
+          redirect, showError
+        );
+      }
     };
 
-    $scope.createAccount = function(email, pass, confirm) {
+    $scope.createAccount = function(email, pass, confirm, firstName, lastName, userName, termsConditions) {
       $scope.err = null;
-      if( !pass ) {
-        $scope.err = 'Please enter a password';
+      if( !email ) {
+        $scope.err = 'Please enter an email.';
+        $ionicPopup.alert({
+          title: 'Email Invalid',
+          template: 'Please enter a valid email.'});
+      }
+      else if( !pass ) {
+        $scope.err = 'Please enter a password.';
+        $ionicPopup.alert({
+          title: 'Password Empty',
+          template: 'Please enter a password'});
       }
       else if( pass !== confirm ) {
-        $scope.err = 'Passwords do not match';
+        $scope.err = 'Passwords do not match.';
+        $ionicPopup.alert({
+          title: 'Password Confirmation Invalid',
+          template: 'Passwords do not match.'});
+      }
+      else if( !firstName ) {
+        $scope.err = 'Please enter a first name.';
+        $ionicPopup.alert({
+          title: 'Firstname Empty',
+          template: 'Please enter a first name.'});
+      }
+      else if( !lastName ) {
+        $scope.err = 'Please enter a last name.';
+        $ionicPopup.alert({
+          title: 'Last Name Empty',
+          template: 'Please enter a last name.'});
+      }
+      else if( !userName ) {
+        $scope.err = 'Please enter a user name.';
+        $ionicPopup.alert({
+          title: 'Username Empty',
+          template: 'Please enter a user name.'});
+      }
+      else if( !termsConditions ) {
+        $scope.err = 'Please accept the Terms and Conditions.';
+        $ionicPopup.alert({
+          title: 'Terms and Conditions',
+          template: 'Please read and accept the Terms and Conditions'});
       }
       else {
         Auth.$createUser({email: email, password: pass})
@@ -39,23 +89,25 @@ angular.module('workspaceApp')
             // authenticate so we have permission to write to Firebase
             return Auth.$authWithPassword({email: email, password: pass}, {rememberMe: true});
           })
-          .then(createProfile)
+          .then(function(authData) {
+            console.log(authData.uid); //should log new uid.
+            return createProfile(authData);
+          })
+          // .then(createProfile)
           .then(redirect, showError);
       }
 
-      function createProfile(user) {
-        var ref = Ref.child('users', user.uid), def = $q.defer();
-        ref.set({email: email, name: firstPartOfEmail(email)}, function(err) {
-          $timeout(function() {
-            if( err ) {
-              def.reject(err);
-            }
-            else {
-              def.resolve(ref);
-            }
-          });
+      function createProfile(authData) {
+        var profile = $firebaseArray(Ref.child('profile'));
+        profile.$add({
+          email: email,
+          id: authData.uid,
+          gravatar: authData.password.profileImageURL,
+          provider: authData.provider,
+          firstName: firstName,
+          lastName: lastName,
+          userName: userName
         });
-        return def.promise;
       }
     };
 

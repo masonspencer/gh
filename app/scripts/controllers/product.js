@@ -8,7 +8,7 @@
  * Controller of the workspaceApp
  */
 angular.module('workspaceApp')
-  .controller('FeeditemCtrl', function ($scope, Ref, $routeParams, $firebaseArray, $timeout) {
+  .controller('ProductCtrl', function ($scope, Ref, $routeParams, $firebaseArray, $timeout) {
     var params = $routeParams.itemID;
     // synchronize a read-only, synchronized array of geerItem, limit to most recent 10
     var geerItems = $firebaseArray(Ref.child('geerItem'));

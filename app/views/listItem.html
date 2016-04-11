@@ -1,6 +1,6 @@
     <ion-nav-bar class="bar-stable">
           <ion-nav-title>
-      Create Item
+      Describe Item
     </ion-nav-title>
 			<ion-nav-back-button>
 			</ion-nav-back-button>
@@ -12,18 +12,25 @@
 		</ion-nav-bar>		
 <ion-view >
         <ion-content class="padding has-header">
-<p ng-show="geerItem">{{geerItem}}</p>
-
-
-
 <form ng-submit="addItem(newItem);newItem = null;">
-  <input placeholder="Name..." ng-model="newItem.name">
-  <input placeholder="Price..." ng-model="newItem.price">
-  <input placeholder="Description..." ng-model="newItem.description">
-  <input placeholder="Tags..." ng-model="newItem.tags">
-  <button type="submit">send</button>
+	  <div class="list list-inset">
+	    <label class="item item-input">
+	      <input type="text" placeholder="Name" ng-model="newItem.name">
+	    </label>
+	    <label class="item item-input">
+	      <input type="text" placeholder="Price" ng-model="newItem.price">
+	    </label>
+	    <label class="item item-input">
+            <textarea placeholder="Description"  ng-model="newItem.description"></textarea>
+	    </label>
+	    <label class="item item-input">
+	      <input type="text" placeholder="Tags" ng-model="newItem.tags">
+	    </label>
+	  </div>
+	  <div class="padding">
+	    <button type="submit" class="button button-block button-positive">Submit</button>
+	  </div>
 </form>
-
 
        </ion-content>
 </ion-view>

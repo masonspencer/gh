@@ -35,6 +35,9 @@ module.exports = function(config) {
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/ionic/release/js/ionic.js',
       'bower_components/ionic/release/js/ionic-angular.js',
+      'bower_components/moment/moment.js',
+      'bower_components/angular-moment/angular-moment.js',
+      'bower_components/ng-lodash/build/ng-lodash.js',
       'bower_components/mockfirebase/browser/mockfirebase.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower

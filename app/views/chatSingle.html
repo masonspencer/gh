@@ -1,6 +1,6 @@
     <ion-nav-bar class="bar-stable">
           <ion-nav-title>
-      Feed
+      Conversation
     </ion-nav-title>
 			<ion-nav-back-button>
 			</ion-nav-back-button>
@@ -10,36 +10,31 @@
 				</button>
 			</ion-nav-buttons>
 		</ion-nav-bar>		
-<ion-view >
-<h2>Chat</h2>
-{{params.from}}
-<form>
-  <input class="text-input"  placeholder="Message..." ng-model="newMessage">
-  <button type="submit" class="button--cta" ng-click="addMessage(newMessage);newMessage = null;">send</button>
-</form>
-
-<ul id="messages" ng-show="messages.length">
-  <li ng-repeat="message in messages | reverse">{{message.text}}</li>
-</ul>
-
-<p class="alert alert-danger" ng-show="err">{{err}}</p>
-
-  <div class="comment">
-    <a class="avatar">
-      <img src="http://dummyimage.com/60/e6e6e6/fff.jpg&text=D+C">
-    </a>
-    <div class="content">
-      <a class="author">Dusty</a>
-      <div class="metadata">
-        <span class="date">Today at 5:42PM</span>
-      </div>
-      <div class="text">
-            How artistic!
-      </div>
-      <div class="actions">
-      </div>
-    </div>
-  </div>
-  
-          </ion-content>
+<ion-view>
+	<ion-content class="padding has-header">
+		<ion-list show-delete="shouldShowDelete" type="list-inset">
+			<ion-item class="item-text-wrap" type="item-text-wrap" ng-repeat="message in messages">
+				<h4>{{message.author}} :</h4>
+				<span am-time-ago="message.time" class="item-note">
+				</span>
+				<p>{{message.body}}</p>
+				<ion-option-button class="button-assertive" ng-click="alert(message); remove(message)">
+					Delete
+				</ion-option-button>
+			</ion-item>
+			
+		</ion-list>
+			<ion-item class="item item-input-inset">
+				<label class="item-input-wrapper">
+					<input type="text" placeholder="Type in your message..."  ng-model="newMessage">
+				</label>
+				<button ng-click="addMessage(newMessage);newMessage = null;" class="button button-small button-balanced">
+					Send
+				</button>
+			</ion-item>
+			<br />
+			<br />
+			<br />
+  <p class="alert alert-danger" ng-show="err">{{err}}</p>
+   </ion-content>
 </ion-view>

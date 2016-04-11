@@ -12,63 +12,26 @@
 		</ion-nav-bar>		
 <ion-view >
         <ion-content class="padding has-header">
-<form>
-  <input class="text-input"  placeholder="Message..." ng-model="newMessage">
-  <button type="submit" class="button--cta" ng-click="addMessage(newMessage);newMessage = null;">send</button>
-</form>
+          {{conversationList}}
 
-<ul id="messages" ng-show="messages.length">
-  <li ng-repeat="message in messages | reverse">{{message.text}}</li>
+<ul id="messages" ng-show="conversationList.length">
+  <li ng-repeat="conversationList in conversationList">{{conversationList.$id}}</li>
+  {{messages}}
 </ul>
 
 <p class="alert alert-danger" ng-show="err">{{err}}</p>
 
-  <div class="comment">
-    <a class="avatar">
-      <img src="http://dummyimage.com/60/e6e6e6/fff.jpg&text=D+C">
+<div class="list">
+
+    <a class="item item-avatar" href="#">
+      <img src="venkman.jpg">
+      <h2>Venkman</h2>
+      <p>Back off, man. I'm a scientist.</p>
     </a>
-    <div class="content">
-      <a class="author">Dusty</a>
-      <div class="metadata">
-        <span class="date">Today at 5:42PM</span>
-      </div>
-      <div class="text">
-            How artistic!
-      </div>
-      <div class="actions">
-      </div>
-    </div>
-  </div>
+</div>
+
   
-  		<ion-list ng-show="vm.roomName">
-			<ion-item class="item item-input-inset">
-				<label class="item-input-wrapper">
-					<input type="text" ng-model="vm.IM.textMessage" placeholder="Type in your message...">
-				</label>
-				<button ng-click="vm.sendMessage(vm.IM.textMessage)" class="button button-small button-balanced">
-					Send
-				</button>
-			</ion-item>
-			<ion-item ng-hide="vm.messages" class="textCenter">
-				<i class="icon ion-loading-c"></i> Loading messages
-			</ion-item>
-			<ion-item ng-if="vm.messages.length == 0" class="textCenter">
-				<h4>No messages in this room. Send message to start.</h4>
-			</ion-item>
-			<ion-item class="" ng-repeat="message in vm.messages | orderBy:'createdAt':true" type="item-text-wrap">
-				<h4>{{message.from}} :</h4>
-				<span am-time-ago="vm.message.createdAt" class="item-note">
-				</span>
-				<p>{{message.message}}</p>
-				<ion-option-button class="button-assertive" ng-click="vm.remove(message)">
-					Delete
-				</ion-option-button>
-			</ion-item>
-		</ion-list>
-		<ion-list ng-hide="vm.roomName">
-			<ion-item class="textCenter">
-				<h4>Please select a room to message first.</h4>
-			</ion-item>
-		</ion-list>
+
+
           </ion-content>
       </ion-view>

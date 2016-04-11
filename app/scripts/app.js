@@ -19,7 +19,9 @@ angular.module('workspaceApp', [
     'firebase',
     'firebase.ref',
     'firebase.auth',
-    'ionic'
+    'ionic',
+    'angularMoment',
+    'ngLodash'
     // 'starter.controllers',
     // 'starter.services'
   ]);

@@ -82,9 +82,9 @@ angular.module('workspaceApp')
         templateUrl: 'views/account.html',
         controller: 'AccountCtrl'
       })
-      .when('/feedItem/:itemID', {
-        templateUrl: 'views/feeditem.html',
-        controller: 'FeeditemCtrl'
+      .when('/product/:itemID', {
+        templateUrl: 'views/product.html',
+        controller: 'ProductCtrl'
       })
       .otherwise({redirectTo: '/'});
   }])
