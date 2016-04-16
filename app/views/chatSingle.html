@@ -13,12 +13,12 @@
 <ion-view>
 	<ion-content class="padding has-header">
 		<ion-list show-delete="shouldShowDelete" type="list-inset">
-			<ion-item class="item-text-wrap" type="item-text-wrap" ng-repeat="message in messages">
-				<h4>{{message.author}} :</h4>
-				<span am-time-ago="message.time" class="item-note">
+			<ion-item class="item-text-wrap" type="item-text-wrap" ng-repeat="conversation in conversation">
+				<h4>{{conversation.author}} :</h4>
+				<span am-time-ago="conversation.time" class="item-note">
 				</span>
-				<p>{{message.body}}</p>
-				<ion-option-button class="button-assertive" ng-click="alert(message); remove(message)">
+				<p>{{conversation.body}}</p>
+				<ion-option-button class="button-assertive" ng-click="remove(conversation)">
 					Delete
 				</ion-option-button>
 			</ion-item>
@@ -28,7 +28,7 @@
 				<label class="item-input-wrapper">
 					<input type="text" placeholder="Type in your message..."  ng-model="newMessage">
 				</label>
-				<button ng-click="addMessage(newMessage);newMessage = null;" class="button button-small button-balanced">
+				<button ng-click="addConversation(newMessage);newMessage = null;" class="button button-small button-balanced">
 					Send
 				</button>
 			</ion-item>

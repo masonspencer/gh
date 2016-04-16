@@ -66,7 +66,7 @@ angular.module('workspaceApp')
         templateUrl: 'views/chat.html',
         controller: 'ChatCtrl'
       })
-      .whenAuthenticated('/chatSingle/:from', {
+      .whenAuthenticated('/chatSingle/:conversationId', {
         templateUrl: 'views/chatSingle.html',
         controller: 'ChatSingleCtrl'
       })

@@ -11,7 +11,7 @@ angular.module('workspaceApp')
     $scope.user = user;
     $scope.logout = function() { Auth.$unauth(); };
     $scope.messages = [];
-    var profile = $firebaseObject(Ref.child('users/'+user.uid));
+    var profile = $firebaseObject(Ref.child('users/' + user.uid));
     profile.$bindTo($scope, 'profile');
     
 

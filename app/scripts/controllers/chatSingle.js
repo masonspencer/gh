@@ -11,16 +11,16 @@ angular.module('workspaceApp')
   .controller('ChatSingleCtrl', function ($scope, Ref, user, $routeParams, $firebaseObject, $firebaseArray, $timeout) {
     var params = $routeParams;
     // synchronize a read-only, synchronized array of messages, limit to most recent 10
-    $scope.messages = $firebaseArray(Ref.child('messages/' + params.from + '/messages'));
+    $scope.conversation = $firebaseArray(Ref.child('conversations/' + params.conversationId + '/messages'));
     
     // display any errors
-    $scope.messages.$loaded().catch(alert);
+    $scope.conversation.$loaded().catch(alert);
 
     // provide a method for adding a message
-    $scope.addMessage = function(newMessage) {
+    $scope.addConversation = function(newMessage) {
       if( newMessage ) {
         // push a message to the end of the array
-        $scope.messages.$add({
+        $scope.conversation.$add({
           author: user.uid,
           body: newMessage,
           time: Date.now()
@@ -30,9 +30,9 @@ angular.module('workspaceApp')
       }
     };
     
-  $scope.remove = function(message) {
-    if (message.author === user.uid) {
-    $scope.messages.$remove(message);
+  $scope.remove = function(conversation) {
+    if (conversation.author === user.uid) {
+    $scope.conversation.$remove(conversation);
     }
     else {
       alert('You cant remove that');

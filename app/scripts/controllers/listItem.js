@@ -9,14 +9,15 @@
  */
 angular.module('workspaceApp')
   .controller('listItemCtrl', function ($scope, Ref, $firebaseArray, $timeout) {
-    $scope.geerItems = $firebaseArray(Ref.child('geerItem'));
-
+    $scope.geerItems = $firebaseArray(Ref.child('products'));
+    var authData = Ref.getAuth();
     // provide a method for adding a message
     $scope.addItem = function(newItem) {
       if( newItem ) {
         // push a message to the end of the array
         $scope.geerItems.$add({
           name: newItem.name,
+          owner: authData.uid,
           price: newItem.price,
           description: newItem.description,
           tags: newItem.tags

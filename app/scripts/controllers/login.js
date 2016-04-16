@@ -7,7 +7,7 @@
  * Manages authentication to any active providers.
  */
 angular.module('workspaceApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location, $q, Ref, $firebaseArray, $timeout, $ionicPopup) {
+  .controller('LoginCtrl', function ($scope, Auth, $location, $q, Ref, $firebaseArray, $timeout, $ionicPopup, Firebase) {
     $scope.oauthLogin = function(provider) {
       $scope.err = null;
       Auth.$authWithOAuthPopup(provider, {rememberMe: true}).then(redirect, showError);
@@ -98,10 +98,10 @@ angular.module('workspaceApp')
       }
 
       function createProfile(authData) {
-        var profile = $firebaseArray(Ref.child('profile'));
-        profile.$add({
+        var profile = new Firebase('https://blistering-torch-3665.firebaseio.com/profile/' + authData.uid);
+        // var profile = $firebaseArray(Ref.child('profile/' + authData.uid));
+        profile.set({
           email: email,
-          id: authData.uid,
           gravatar: authData.password.profileImageURL,
           provider: authData.provider,
           firstName: firstName,

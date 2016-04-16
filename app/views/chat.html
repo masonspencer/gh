@@ -12,26 +12,18 @@
 		</ion-nav-bar>		
 <ion-view >
         <ion-content class="padding has-header">
-          {{conversationList}}
+ 
 
-<ul id="messages" ng-show="conversationList.length">
-  <li ng-repeat="conversationList in conversationList">{{conversationList.$id}}</li>
-  {{messages}}
-</ul>
 
-<p class="alert alert-danger" ng-show="err">{{err}}</p>
 
-<div class="list">
+<div class="list" ng-repeat="conversation in conversations">
 
-    <a class="item item-avatar" href="#">
-      <img src="venkman.jpg">
-      <h2>Venkman</h2>
-      <p>Back off, man. I'm a scientist.</p>
+    <a class="item item-avatar" href="#/chatSingle/{{conversation.$key}}">
+      <img src="{{ userGravatar[$index] }}">
+      <h2 ng-init="getUser(conversation.conversation.members, $index)">{{ userName[$index] }}</h2>
+      <p ng-init="lastMessage = getLastMessage(conversation.conversation.messages)">{{ lastMessage }} </p>
     </a>
 </div>
-
-  
-
 
           </ion-content>
       </ion-view>

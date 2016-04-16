@@ -1,6 +1,6 @@
     <ion-nav-bar class="bar-stable">
           <ion-nav-title>
-      {{geerItem.text}}
+      {{product.name}}
     </ion-nav-title>
 			<ion-nav-back-button>
 			</ion-nav-back-button>
@@ -17,13 +17,13 @@
 			  <ion-slide><img width="100%" src="http://geerhunter.com/app/assets/ecommerce/1.jpg"/></ion-slide>
 			</ion-slide-box>
 		
-		<button class="button button-block button-positive" ng-click="vm.addToCart()">
+		<button class="button button-block button-positive" ng-click="newConversation()">
 			<i class="icon ion-ios-cart"></i> Make Offer
 		</button>
 		<ul class="list">
-		    <li class="item">{{geerItem.name}}</li>
-		    <li class="padding"><p>{{geerItem.description}}</p></li>
-		    <li class="item">{{geerItem.price | currency : geerItem.currency  : 2 }}</li>
+		    <li class="item">{{product.name}}</li>
+		    <li class="padding"><p>{{product.description}}</p></li>
+		    <li class="item">{{product.price | currency : product.currency  : 2 }}</li>
 		</ul>
 		
 		

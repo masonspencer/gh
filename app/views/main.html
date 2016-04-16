@@ -17,13 +17,13 @@
           <!--</ul>-->
           
 
-<div class="item item-body" ng-repeat="geerItem in geerItems | reverse">
-      <p>{{geerItem.name}}</p>
-      <p>{{geerItem.price | currency : geerItem.currency  : 2 }}</p>
-    <a href="#/product/{{geerItem.$id}}">
+<div class="item item-body" ng-repeat="product in products | reverse">
+      <p>{{product.name}}</p>
+      <p>{{product.price | currency : product.currency  : 2 }}</p>
+    <a href="#/product/{{product.$id}}">
     <img class="full-image" src="http://geerhunter.com/app/assets/ecommerce/1.jpg"></a>
     <p>
-      {{geerItem.description}}
+      {{product.description}}
     </p>
     <p>
         <i class="ion-eye"></i>
