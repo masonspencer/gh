@@ -21,7 +21,9 @@ angular.module('workspaceApp', [
     'firebase.auth',
     'ionic',
     'angularMoment',
-    'ngLodash'
+    'ngLodash',
+    'ui.router',
+    'ngCordova'
     // 'starter.controllers',
     // 'starter.services'
   ]);

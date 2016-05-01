@@ -7,7 +7,7 @@
  * Manages authentication to any active providers.
  */
 angular.module('workspaceApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location, $q, Ref, $firebaseArray, $timeout, $ionicPopup, Firebase) {
+  .controller('LoginCtrl', function ($scope, Auth, $state, $q, Ref, $firebaseArray, $timeout, $ionicPopup, Firebase, $rootScope) {
     $scope.oauthLogin = function(provider) {
       $scope.err = null;
       Auth.$authWithOAuthPopup(provider, {rememberMe: true}).then(redirect, showError);
@@ -125,7 +125,12 @@ angular.module('workspaceApp')
   
 
     function redirect() {
-      $location.path('/account');
+      if ($rootScope.previousState != null) {
+        $state.go($rootScope.previousState);
+      }
+      else {
+        $state.go('feed');
+      }
     }
 
     function showError(err) {

@@ -8,20 +8,33 @@
  */
  /*global angular*/
 angular.module('workspaceApp')
-  .controller('ChatSingleCtrl', function ($scope, Ref, user, $routeParams, $firebaseObject, $firebaseArray, $timeout) {
-    var params = $routeParams;
-    // synchronize a read-only, synchronized array of messages, limit to most recent 10
-    $scope.conversation = $firebaseArray(Ref.child('conversations/' + params.conversationId + '/messages'));
+  .controller('ChatSingleCtrl', function ($scope, Ref, $state, $stateParams, $firebaseObject, $firebaseArray, $timeout, Firebase) {
+    var params = $stateParams;
+    var authData = Ref.getAuth();
+    // var addConversationRef = $firebaseArray(Ref.child('conversations/' + params.conversationId + '/messages'));
+    var conversation = $firebaseArray(Ref.child('conversations').child(params.conversationId).child('messages'));
+    $scope.messages = [];
     
-    // display any errors
-    $scope.conversation.$loaded().catch(alert);
+    conversation.$loaded()
+      .then(function(data) {
+        angular.forEach(data, function(value, key) {
+          $scope.messages.push(value);
+          // $scope.messages.push(value);
+              var userRef = new Firebase('https://blistering-torch-3665.firebaseio.com/profile/' + value.author);
+              userRef.once('value', function(snap) {
+                $scope.messages[key].userName = snap.val().userName;
+                $scope.messages[key].gravatar = snap.val().gravatar;
+              });
+      });
+    });
+
 
     // provide a method for adding a message
     $scope.addConversation = function(newMessage) {
       if( newMessage ) {
         // push a message to the end of the array
-        $scope.conversation.$add({
-          author: user.uid,
+        conversation.$add({
+          author: authData.uid,
           body: newMessage,
           time: Date.now()
         })
@@ -30,14 +43,6 @@ angular.module('workspaceApp')
       }
     };
     
-  $scope.remove = function(conversation) {
-    if (conversation.author === user.uid) {
-    $scope.conversation.$remove(conversation);
-    }
-    else {
-      alert('You cant remove that');
-    }
-  };
 
     function alert(msg) {
       $scope.err = msg;

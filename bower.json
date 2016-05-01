@@ -17,7 +17,8 @@
     "angular-moment": "^0.10.3",
     "moment": "^2.12.0",
     "ng-lodash": "^0.4.0",
-    "firebase-util": "^0.2.5"
+    "firebase-util": "^0.2.5",
+    "ngCordova": "^0.1.26-alpha"
   },
   "devDependencies": {
     "mockfirebase": "0.11.0",

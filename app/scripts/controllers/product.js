@@ -8,8 +8,8 @@
  * Controller of the workspaceApp
  */
 angular.module('workspaceApp')
-  .controller('ProductCtrl', function ($scope, Ref, $routeParams, $firebaseArray, $timeout, Firebase, $location) {
-    var params = $routeParams.itemID;
+  .controller('ProductCtrl', function ($scope, $state, Ref, $stateParams, $firebaseArray, $timeout, Firebase) {
+    var params = $stateParams.itemID;
     console.log(params);
     var authData = Ref.getAuth();
     
@@ -27,28 +27,34 @@ angular.module('workspaceApp')
   
   
   $scope.newConversation = function() {
-    conversations.$add({
-      productRef: params,
-      members: [$scope.product.owner, authData.uid],
-      
-    }).then(function(ref) {
-      var id = ref.key();
-      console.log("added record with id " + id);
-      conversations.$indexFor(id); // returns location in the array
-      var profileConversations = new Firebase('https://blistering-torch-3665.firebaseio.com/profile/' + authData.uid + '/conversations/');
-      var conversation = {}; 
-      conversation[id] = true; 
-        profileConversations.update(conversation);
-      
-      
-      var ownerProfileConversations = new Firebase('https://blistering-torch-3665.firebaseio.com/profile/' + $scope.product.owner + '/conversations/');
-      var ownerProfileConversation = {}; 
-      ownerProfileConversation[id] = true; 
-      ownerProfileConversations.update(ownerProfileConversation);
-      
-      
-      $location.path('/chatSingle/' + id);
-    });
-  };
+    var authData = Ref.getAuth();
+    if (authData != null) {
+      conversations.$add({
+        productRef: params,
+        members: [$scope.product.owner, authData.uid],
+        
+      }).then(function(ref) {
+        var id = ref.key();
+        console.log("added record with id " + id);
+        conversations.$indexFor(id); // returns location in the array
+        var profileConversations = new Firebase('https://blistering-torch-3665.firebaseio.com/profile/' + authData.uid + '/conversations/');
+        var conversation = {}; 
+        conversation[id] = true; 
+          profileConversations.update(conversation);
+        
+        
+        var ownerProfileConversations = new Firebase('https://blistering-torch-3665.firebaseio.com/profile/' + $scope.product.owner + '/conversations/');
+        var ownerProfileConversation = {}; 
+        ownerProfileConversation[id] = true; 
+        ownerProfileConversations.update(ownerProfileConversation);
+        
+        $state.go('chatSingle', {'conversationId': id});
+        // $location.path('/chatSingle/' + id);
+      });
+  }
+  else {
+    $state.go("login");
+  }
+};
 
   });

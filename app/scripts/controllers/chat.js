@@ -1,60 +1,56 @@
 'use strict';
 
- /*global angular*/
+/**
+ * @ngdoc function
+ * @name workspaceApp.controller:Chat2Ctrl
+ * @description
+ * # Chat2Ctrl
+ * Controller of the workspaceApp
+ */
 angular.module('workspaceApp')
-  .controller('ChatCtrl', function ($scope, Ref, user, $firebaseObject, $firebaseArray, $timeout, Firebase) {
-  
-  var authData = Ref.getAuth();
-  var i = '';
-
-
-var baseRef = new Firebase("https://blistering-torch-3665.firebaseio.com");
-var norm = new Firebase.util.NormalizedCollection(
-  [baseRef.child('/profile/' + authData.uid + '/conversations'), "usersConversations"],
-  baseRef.child("/conversations")
-);
-
-norm = norm.select(
-  "usersConversations.$key",
-  {"key":"conversations.$value","alias":"conversation"}
-);
-
-var ref = norm.ref();
-
-ref.on('value', function(snap) {
-  $scope.conversations = snap.val();
-});
-
-$scope.userName = [];
-$scope.userGravatar = [];
-$scope.getUser = function(members, index) {
-  
-  for (i = 0; i < members.length; i++) { 
-    if (members[i] === authData.uid) {
-
-    }
-    else {
-      var userRef = new Firebase('https://blistering-torch-3665.firebaseio.com/profile/' + members[i]);
-      userRef.on('value', function(snap) {
-        $scope.userName[index] = snap.val().userName;
-        $scope.userGravatar[index] = snap.val().gravatar;
+  .controller('ChatCtrl', function ($scope, $state, Ref, $firebaseObject, $firebaseArray, $timeout, Firebase) {
+ 
+ var authData = Ref.getAuth();
+ var userID = authData.uid;
+ var usersConversations = $firebaseArray(Ref.child('profile').child(userID).child('conversations'));
+ $scope.conversations = [];
+ var i = '';
+ 
+ 
+  usersConversations.$loaded()
+    .then(function(data) {
+      angular.forEach(data, function(value, key) {
+       
+        $firebaseArray(Ref.child('conversations').child(value.$id).child('messages').limitToLast(1)).$loaded().then(function(data) {
+           $scope.conversations.push(data);
+           $scope.conversations[key].push(value.$id);
+        });
+        
+        // console.log(key);
+        $firebaseArray(Ref.child('conversations').child(value.$id).child('members')).$loaded().then(function(data) {
+          // console.log(data);
+          for (i = 0; i < data.length; i++) { 
+            if (data[i].$value === userID) {
+              console.log('me');
+            }
+            else {
+              var userRef = new Firebase('https://blistering-torch-3665.firebaseio.com/profile/' + data[i].$value);
+              userRef.once('value', function(snap) {
+                console.log(snap.val().userName);
+                $scope.conversations[key].push(snap.val().userName);
+                $scope.conversations[key].push(snap.val().gravatar);
+              });
+            }
+          }
+          
+        });        
+      
       });
-    }
-  }
-  
-};
+      
+      
+    });
+ 
 
-$scope.getLastMessage = function(messages) {
-  // for (var message in messages) {
-          var lastMessageId = Object.keys(messages)[Object.keys(messages).length - 1];
-          return messages[lastMessageId].body;    // or do something with it and break
-  // }
-};
-
-    // function alert(msg) {
-    //   $scope.err = msg;
-    //   $timeout(function() {
-    //     $scope.err = null;
-    //   }, 5000);
-    // }
+ 
+ 
   });

@@ -1,16 +1,7 @@
-    <ion-nav-bar class="bar-stable">
-          <ion-nav-title>
-      Feed
-    </ion-nav-title>
-			<ion-nav-back-button>
-			</ion-nav-back-button>
-
-			<ion-nav-buttons side="left">
-				<button class="button button-icon button-clear ion-navicon" menu-toggle="left">
-				</button>
-			</ion-nav-buttons>
-		</ion-nav-bar>		
 <ion-view >
+	<ion-nav-title>
+	Feed
+	</ion-nav-title>
         <ion-content class="padding has-header">
           <!--<ul id="geerItems" ng-show="geerItems.length">-->
           <!--  <li ng-repeat="geerItem in geerItems | reverse">{{geerItem.text}}</li>-->
@@ -20,7 +11,7 @@
 <div class="item item-body" ng-repeat="product in products | reverse">
       <p>{{product.name}}</p>
       <p>{{product.price | currency : product.currency  : 2 }}</p>
-    <a href="#/product/{{product.$id}}">
+    <a ui-sref="product({ itemID: product.$id })">
     <img class="full-image" src="http://geerhunter.com/app/assets/ecommerce/1.jpg"></a>
     <p>
       {{product.description}}

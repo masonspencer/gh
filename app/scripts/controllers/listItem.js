@@ -8,7 +8,7 @@
  * Controller of the workspaceApp
  */
 angular.module('workspaceApp')
-  .controller('listItemCtrl', function ($scope, Ref, $firebaseArray, $timeout) {
+  .controller('listItemCtrl', function ($scope, $state, Ref, $firebaseArray, $timeout, $cordovaCamera) {
     $scope.geerItems = $firebaseArray(Ref.child('products'));
     var authData = Ref.getAuth();
     // provide a method for adding a message
@@ -26,5 +26,12 @@ angular.module('workspaceApp')
           .catch(alert);
       }
     };
+    
+    
+  ionic.Platform.ready(function(){
+    // will execute when device is ready, or immediately if the device is already ready.
+    console.log('ready');
+    console.log(navigator.camera);
+  });
 
   });

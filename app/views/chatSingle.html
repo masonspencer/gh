@@ -1,26 +1,14 @@
-    <ion-nav-bar class="bar-stable">
-          <ion-nav-title>
-      Conversation
-    </ion-nav-title>
-			<ion-nav-back-button>
-			</ion-nav-back-button>
-
-			<ion-nav-buttons side="left">
-				<button class="button button-icon button-clear ion-navicon" menu-toggle="left">
-				</button>
-			</ion-nav-buttons>
-		</ion-nav-bar>		
 <ion-view>
+	<ion-nav-title>
+	Chat
+	</ion-nav-title>
 	<ion-content class="padding has-header">
 		<ion-list show-delete="shouldShowDelete" type="list-inset">
-			<ion-item class="item-text-wrap" type="item-text-wrap" ng-repeat="conversation in conversation">
-				<h4>{{conversation.author}} :</h4>
+			<ion-item class="item-text-wrap" type="item-text-wrap" ng-repeat="message in messages">
+				<h4>{{message.userName}} :</h4>
 				<span am-time-ago="conversation.time" class="item-note">
 				</span>
-				<p>{{conversation.body}}</p>
-				<ion-option-button class="button-assertive" ng-click="remove(conversation)">
-					Delete
-				</ion-option-button>
+				<p>{{message.body}}</p>
 			</ion-item>
 			
 		</ion-list>

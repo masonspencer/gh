@@ -7,11 +7,11 @@
  * Provides rudimentary account management functions.
  */
 angular.module('workspaceApp')
-  .controller('AccountCtrl', function ($scope, user, Auth, Ref, $firebaseObject, $timeout) {
-    $scope.user = user;
+  .controller('AccountCtrl', function ($scope, Auth, $state, Ref, $firebaseObject, $timeout) {
+    var authData = Ref.getAuth();
     $scope.logout = function() { Auth.$unauth(); };
     $scope.messages = [];
-    var profile = $firebaseObject(Ref.child('users/' + user.uid));
+    var profile = $firebaseObject(Ref.child('profile/' + authData.uid));
     profile.$bindTo($scope, 'profile');
     
 
